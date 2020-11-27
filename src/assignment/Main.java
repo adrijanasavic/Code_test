@@ -13,6 +13,8 @@ public class Main {
     public static void main(String[] args) {
 
         String header1 = "gender then lastname ascending";
+        String header2 = "dateofbirth ascending";
+
         String divider = "--------------------------";
 
         readFromFile(" \\| ", "pipe.txt");
@@ -24,6 +26,18 @@ public class Main {
 
         sortByGenderThenLastName();
 
+        for (Person p : persons) {
+            System.out.printf("%-15s %-15s %-15s %-15s %-15s %n",
+                    p.getLastName(), p.getFirstName(), p.getGender(),
+                    p.getDateOfBirth(), p.getFavoriteColor());
+        }
+
+        System.out.println("\n" + divider + "\n");
+
+        System.out.println(header2);
+        System.out.println(divider + "\n");
+
+        sortByDateOfBirth();
         for (Person p : persons) {
             System.out.printf("%-15s %-15s %-15s %-15s %-15s %n",
                     p.getLastName(), p.getFirstName(), p.getGender(),
@@ -102,5 +116,43 @@ public class Main {
 
             persons.set(i + 1, key);
         }
+    }
+
+    public static void sortByDateOfBirth() {
+
+        int i;
+
+        for (int j = 1; j < persons.size(); j++) {
+
+            Person key = persons.get(j);
+            i = j - 1;
+
+            while (i >= 0) {
+                // comapare year
+                if (persons.get(i).getDateArray()[2].compareTo(key.getDateArray()[2]) > 0) {
+                    persons.set(i + 1, persons.get(i));
+
+                    i--;
+                    // compare month
+                } else if (persons.get(i).getDateArray()[2].compareTo(key.getDateArray()[2]) == 0 &&
+                        persons.get(i).getDateArray()[0].compareTo(key.getDateArray()[0]) > 0) {
+                    persons.set(i + 1, persons.get(i));
+
+                    i--;
+                    // compare day
+                } else if (persons.get(i).getDateArray()[0].compareTo(key.getDateArray()[0]) == 0 &&
+                        persons.get(i).getDateArray()[1].compareTo(key.getDateArray()[1]) > 0) {
+                    persons.set(i + 1, persons.get(i));
+
+                    i--;
+                } else {
+                    break;
+                }
+            }
+
+            persons.set(i + 1, key);
+
+        }
+
     }
 }

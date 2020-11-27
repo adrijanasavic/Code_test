@@ -1,6 +1,5 @@
 package assignment;
 
-import java.awt.font.TextHitInfo;
 
 public class Person {
 
@@ -59,6 +58,12 @@ public class Person {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public String[] getDateArray() {
+        // 0 - month, 1 - day, 2 - year
+        String[] dates = dateOfBirth.split("/");
+        return dates;
     }
 
     public String getFavoriteColor() {
