@@ -12,10 +12,25 @@ public class Main {
 
     public static void main(String[] args) {
 
+        String header1 = "gender then lastname ascending";
+        String divider = "--------------------------";
+
         readFromFile(" \\| ", "pipe.txt");
         readFromFile(" ", "space.txt");
         readFromFile(", ", "comma.txt");
+
+        System.out.println(header1);
+        System.out.println(divider);
+
+        sortByGenderThenLastName();
+
+        for (Person p : persons) {
+            System.out.printf("%-15s %-15s %-15s %-15s %-15s %n",
+                    p.getLastName(), p.getFirstName(), p.getGender(),
+                    p.getDateOfBirth(), p.getFavoriteColor());
+        }
     }
+
 
     public static void readFromFile(String separator, String fileName) {
 
@@ -60,4 +75,32 @@ public class Main {
         }
     }
 
+    public static void sortByGenderThenLastName() {
+
+        int i;
+
+        for (int j = 1; j < persons.size(); j++) {
+
+            Person key = persons.get(j);
+            i = j - 1;
+
+            while (i >= 0) {
+
+                if (persons.get(i).getGender().compareTo(key.getGender()) > 0) {
+                    persons.set(i + 1, persons.get(i));
+
+                    i--;
+                } else if (persons.get(i).getGender().compareTo(key.getGender()) == 0 &&
+                        persons.get(i).getLastName().compareTo(key.getLastName()) > 0) {
+                    persons.set(i + 1, persons.get(i));
+
+                    i--;
+                } else {
+                    break;
+                }
+            }
+
+            persons.set(i + 1, key);
+        }
+    }
 }

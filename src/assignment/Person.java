@@ -1,5 +1,7 @@
 package assignment;
 
+import java.awt.font.TextHitInfo;
+
 public class Person {
 
     private String lastName;
@@ -13,8 +15,17 @@ public class Person {
         super();
         this.lastName = lastName;
         this.firstName = firstName;
-        this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
+        switch (gender) {
+            case "M":
+                this.gender = "Male";
+                break;
+            case "F":
+                this.gender = "Female";
+                break;
+            default:
+                this.gender = gender;
+        }
+        this.dateOfBirth = dateOfBirth.replaceAll("-", "/");
         this.favoriteColor = firstName;
     }
 
