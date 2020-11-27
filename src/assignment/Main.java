@@ -14,6 +14,7 @@ public class Main {
 
         String header1 = "gender then lastname ascending";
         String header2 = "dateofbirth ascending";
+        String header3 = "lastname descending";
 
         String divider = "--------------------------";
 
@@ -43,6 +44,21 @@ public class Main {
                     p.getLastName(), p.getFirstName(), p.getGender(),
                     p.getDateOfBirth(), p.getFavoriteColor());
         }
+
+        System.out.println(divider + "\n");
+
+        System.out.println(header3);
+        System.out.println(divider + "\n");
+
+        sortyByLastName();
+        for (Person p :persons){
+            System.out.printf("%-15s %-15s %-15s %-15s %-15s %n",
+                   p.getLastName(), p.getFirstName(), p.getGender(),
+                    p.getDateOfBirth(), p.getFavoriteColor() );
+        }
+
+        System.out.println("\n" + divider + "\n");
+
     }
 
 
@@ -154,5 +170,24 @@ public class Main {
 
         }
 
+    }
+
+    public static void sortyByLastName(){
+
+        int i;
+
+        for (int j = 1; j < persons.size(); j++){
+
+            Person key = persons.get(j);
+            i = j-1;
+
+            while (i >= 0 && key.getLastName().compareTo(persons.get(i).getLastName()) > 0){
+                persons.set(i + 1, persons.get(i));
+
+                i--;
+            }
+
+            persons.set(i + 1, key);
+        }
     }
 }
